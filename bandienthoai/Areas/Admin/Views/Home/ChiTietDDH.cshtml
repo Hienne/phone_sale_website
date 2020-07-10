@@ -1,0 +1,122 @@
+﻿@model IEnumerable<bandienthoai.Models.ChitietDDH>
+@{
+    ViewBag.Title = "ChiTietDDH";
+    Layout = "~/Areas/Admin/Views/Shared/Admin_Layout.cshtml";
+    int doanhthu = 0;
+    foreach (var a in Model)
+    {
+        doanhthu += a.SoLuong * a.DonGia;
+    }
+}
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Chi tiết đơn đặt hàng</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Khách hàng</th>
+                            <th>Sản phẩm</th>
+                            <th>Ngày đặt</th>
+                            <th>Địa chỉ giao</th>
+                            <th>Số lượng</th>
+                            <th>Đơn giá</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var a in Model)
+                        {
+                            string ngaydat = a.NgayDat.ToString("dd/MM/yyyy");
+                            <tr>
+                                <td>@a.NguoiDung</td>
+                                <td>@a.SanPham</td>
+                                <td>@ngaydat</td>
+                                <td>@a.DiaChiGiao</td>
+                                <td>@a.SoLuong</td>
+                                <td>@a.DonGia</td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Tổng doanh thu trong ngày: @doanhthu$</h6>
+        </div>
+
+        <p>
+            @Html.ActionLink("Quay lại", "getDDHInMon")
+        </p>
+    </div>
+
+@*<div>
+    <h4>Chi tiết đơn đặt hàng</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MaDDH)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaDDH)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NguoiDung)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NguoiDung)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayDat)
+        </dt>
+
+        <dd>
+            @ngaydat
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiaChiGiao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiaChiGiao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SanPham)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SanPham)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoLuong)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoLuong)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoLuong)
+        </dt>
+
+        <dd>
+            @dongia
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Quay lại", "getDDHInMon")
+</p>*@
+

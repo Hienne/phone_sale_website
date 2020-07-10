@@ -1,0 +1,20 @@
+﻿<div class="container">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="logo">
+                <h1><a href="./"><img src="~/Assets/Admin/img/imgSP/logo.png"></a></h1>
+            </div>
+        </div>
+        @if (Session["TAIKHOAN"] != null)
+        {
+            string gt = Session["GIATRIDDH"].ToString() + "$";
+                
+            <div class="col-sm-6">
+                <div class="shopping-item">
+                    <a href="@Url.Action("Index", "GioHang")">Giỏ hàng : <span class="cart-amunt">@gt</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">@Session["DDH"].ToString()</span></a>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>

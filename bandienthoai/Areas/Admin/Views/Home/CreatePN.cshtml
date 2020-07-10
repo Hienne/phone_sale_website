@@ -1,0 +1,106 @@
+﻿@model bandienthoai.Models.PhieuNhapModel
+
+@{
+    ViewBag.Title = "CreatePN";
+    Layout = "~/Areas/Admin/Views/Shared/Admin_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+
+    <div class="signup-container">
+        <h1>Tạo phiếu nhập</h1>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.MaNCC, "MaNCC", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("MaNCC", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.MaNCC, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MaSP, "MaSP", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("MaSP", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.MaSP, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SoLuongNhap)
+            @Html.EditorFor(model => model.SoLuongNhap, new { htmlAttributes = new { placeholder = "Nhập số lượng nhập", @class = "input-signup" } })
+            @Html.ValidationMessageFor(model => model.SoLuongNhap, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DonGiaNhap)
+            @Html.EditorFor(model => model.DonGiaNhap, new { @class = "input-signup", htmlAttributes = new { placeholder = "Nhập đơn giá nhập", @class = "input-signup" } })
+            @Html.ValidationMessageFor(model => model.DonGiaNhap, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group birth-of-date">
+            @Html.LabelFor(model => model.NgayNhap)
+            @Html.EditorFor(model => model.NgayNhap, "{0:dd/MM/yyyy}", new { @class = "input-signup", htmlAttributes = new { placeholder = "Nhập ngày nhập" } })
+            @Html.ValidationMessageFor(model => model.NgayNhap, "", new { @class = "text-danger" })
+        </div>
+
+        <button type="submit" class="signupbtn">Tạo mới</button>
+
+    </div>
+}
+
+<style>
+    .signup-container {
+        width: 980px;
+        margin: auto;
+        margin: 10px auto;
+        padding: 10px;
+        border: 1px solid #ccc;
+        overflow: hidden;
+        position: relative;
+    }
+
+        .signup-container h1 {
+            margin-bottom: 25px;
+        }
+
+    .input-signup {
+        width: 100%;
+        padding: 15px;
+        /*margin: 5px 0 22px 0;*/
+        display: inline-block;
+        border: none;
+        background: #f1f1f1;
+    }
+
+        .input-signup:focus {
+            background-color: #ddd;
+            outline: none;
+        }
+
+    .birth-of-date {
+        margin-bottom: 20px;
+    }
+    /* Set a style for all buttons */
+    .signupbtn {
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 20px auto;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        opacity: 0.9;
+        width: 50%;
+        display: table;
+    }
+
+        .signupbtn:hover {
+            opacity: 1;
+        }
+</style>
+
+
+
+

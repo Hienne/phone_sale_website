@@ -1,0 +1,59 @@
+﻿@model bandienthoai.Entities.SanPham
+@{
+    ViewBag.Title = "ChiTiet";
+    Layout = "~/Views/Shared/MyLayout2.cshtml";
+    string dongia = Model.DonGia + "$";
+    string urlImg = "~/Assets/Admin/img/imgSP/" + Model.HinhAnh;
+}
+
+<div class="single-product-area">
+    <div class="zigzag-bottom"></div>
+    <div class="container">
+        <div class="row">
+            @Html.Partial("Single_Product_Left")
+
+            <div class="col-md-8">
+                <div class="product-content-right">
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="product-images">
+                                <div class="product-main-img">
+                                    <img src="@Url.Content(urlImg)" alt="">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="product-inner">
+                                <h2 class="product-name">@Model.TenSP</h2>
+                                <div class="product-inner-price">
+                                    <ins>@dongia</ins>
+                                </div>
+
+                                <a href="@Url.Action("AddSP", "GioHang", new { idSP = Model.MaSP })" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i>Thêm giỏ hàng</a> 
+
+                                <div role="tabpanel">
+                                    <ul class="product-tab" role="tablist">
+                                        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Description</a></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div role="tabpanel" class="tab-pane fade in active" id="home">
+                                            <h2>Product Description</h2>
+                                            <p>@Model.MoTa</p>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                   @{Html.RenderAction("Single_Product_Related");}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

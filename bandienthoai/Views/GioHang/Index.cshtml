@@ -1,0 +1,103 @@
+﻿@model IEnumerable<bandienthoai.Models.GioHangModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/MyLayout2.cshtml";
+}
+
+<div class="product-big-title-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="product-bit-title text-center">
+                    <h2>Giỏ hàng</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="single-product-area">
+    <div class="zigzag-bottom"></div>
+    <div class="container">
+        <div class="row">
+            @Html.Partial("Single_Product_Left")
+
+            <div class="col-md-8">
+                <div class="product-content-right">
+                    <div class="woocommerce">
+                        <form method="post" action="#">
+                            <table cellspacing="0" class="shop_table cart">
+                                <thead>
+                                    <tr>
+                                        <th class="product-remove">&nbsp;</th>
+                                        <th class="product-thumbnail">&nbsp;</th>
+                                        <th class="product-name">Sản phẩm</th>
+                                        <th class="product-price">Đơn giá</th>
+                                        <th class="product-quantity">Số lượng</th>
+                                        <th class="product-subtotal">Tổng</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var a in Model)
+                                    {
+                                        string urlImg = "~/Assets/Admin/img/imgSP/" + a.HinhAnh;
+                                        string dongia = a.DonGia + "$";
+                                        var test1 = a.MaDDH;
+                                        var test2 = a.MaCHTDDH;
+                                        int tongtien = a.DonGia * a.SoLuong;
+                                        string tongtien2 = tongtien + "$";
+                                        <tr class="cart_item">
+                                            <td class="product-remove">
+                                                <a title="Remove this item" class="remove" href="@Url.Action("DeleteItemGH", new { idSP = a.MaSP, idDDH = a.MaDDH })" data-toggle="modal" data-target="#deleteModal">×</a>
+
+                                            </td>
+
+                                            <td class="product-thumbnail">
+                                                <a href="@Url.Action("ChiTiet", "SanPham", new { id = a.MaSP })"><img width="145" height="145" alt="poster_1_up" class="shop_thumbnail" src="@Url.Content(urlImg)"></a>
+                                            </td>
+
+                                            <td class="product-name">
+                                                <a href="@Url.Action("ChiTiet", "SanPham", new { id = a.MaSP })">@a.TenSP</a>
+                                            </td>
+
+                                            <td class="product-price">
+                                                <span class="amount">@dongia</span>
+                                            </td>
+                                           
+                                            <td class="product-quantity">
+                                                <span class="amount">@Url.Content(a.SoLuong.ToString())</span>
+                                            </td>
+
+                                            <td class="product-subtotal">
+                                                <span class="amount">@tongtien2</span>
+                                            </td>
+
+                                            <td>
+                                                @Html.ActionLink("Chỉnh sửa", "ChinhSua", new { idDDH = test1, idCT = test2 })
+                                            </td>
+                                        </tr>
+
+                                    }
+                                    <tr>
+                                        <td class="actions" colspan="6">
+                                            @Html.ActionLink("Thanh toán", "ThanhToan")
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

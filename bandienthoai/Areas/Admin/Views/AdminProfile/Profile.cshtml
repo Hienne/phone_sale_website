@@ -1,0 +1,92 @@
+﻿@model bandienthoai.Entities.NguoiDung
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Areas/Admin/Views/Shared/Admin_Layout.cshtml";
+    string urlImg = "~/Assets/Admin/img/" + Model.HinhAnh;
+    var ngaysinh = Model.NgaySinh.ToString("dd/MM/yyyy");
+}
+
+<div class="account-infor-container">
+    <div class="imageUser">
+        <img src="@Url.Content(urlImg)" height="200" width="200" style="border:2px solid #676565; border-radius:80px" />
+    </div>
+
+    <div>
+
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.LoaiNguoiDung.TenLoaiND)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LoaiNguoiDung.TenLoaiND)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.HoTen)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.HoTen)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.TaiKhoan)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TaiKhoan)
+            </dd>
+
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DiaChi)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DiaChi)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.SDT)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SDT)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.GioiTinh)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.GioiTinh)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.NgaySinh)
+            </dt>
+
+            <dd>
+                @ngaysinh
+            </dd>
+
+        </dl>
+    </div>
+
+
+
+
+</div>
+
+
+
+

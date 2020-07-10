@@ -1,0 +1,61 @@
+﻿@model bandienthoai.Models.ChitietPN
+@{
+    ViewBag.Title = "ChiTietPN";
+    Layout = "~/Areas/Admin/Views/Shared/Admin_Layout.cshtml";
+    string ngaynhap = Model.NgayNhap.ToString("dd/MM/yyyy");
+    string dongia = Model.DonGia + "$";
+}
+
+<div>
+    <h4>Chi tiết phiếu nhập</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MaPN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaPN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayNhap)
+        </dt>
+
+        <dd>
+            @ngaynhap
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SanPham)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SanPham)
+            
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoLuong)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoLuong)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DonGia)
+        </dt>
+
+        <dd>
+            @dongia
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Quay lại", "AllPNInMon")
+</p>
+
+
+

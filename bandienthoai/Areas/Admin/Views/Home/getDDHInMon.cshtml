@@ -1,0 +1,51 @@
+﻿@model IEnumerable<bandienthoai.Entities.DonDatHang>
+@{
+    ViewBag.Title = "getDDHInMon";
+    Layout = "~/Areas/Admin/Views/Shared/Admin_Layout.cshtml";
+    int doanhthu = 0;
+    foreach(var a in Model)
+    {
+        doanhthu += a.ChiTietDonDatHang.SoLuong * a.ChiTietDonDatHang.SanPham.DonGia;
+    }
+}
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Danh sách đơn đặt hàng trong tháng</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Mã đơn đặt hàng</th>
+                            <th>Ngày đặt</th>
+                            <th>Khách hàng</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var a in Model)
+                        {
+                            string ngaydat = a.NgayDat.ToString("dd/MM/yyyy");
+                            <tr>
+                                <td>@a.MaDDH</td>
+                                <td>@ngaydat</td>
+                                <td>@a.NguoiDung.HoTen</td>
+                                <td>
+                                    @Html.ActionLink("Chi tiết", "ChiTietDDH", new { id = a.MaDDH })
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Tổng doanh thu trong tháng: @doanhthu$</h6>
+        </div>
+    </div>
+

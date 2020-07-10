@@ -1,0 +1,161 @@
+﻿@model bandienthoai.Entities.DonDatHang
+
+@{
+    ViewBag.Title = "ThanhToan";
+    Layout = "~/Views/Shared/MyLayout2.cshtml";
+    var gh = (List<bandienthoai.Models.GioHangModel>)ViewBag.GioHang;
+
+    int total = 0;
+    foreach(var a in gh)
+    {
+        total += a.DonGia * a.SoLuong;
+    }
+
+    var ndDAO = new bandienthoai.DAO.NguoiDungDAO();
+    var nd = ndDAO.getByTaiKhoan(Session["TAIKHOAN"].ToString());
+}
+
+<div class="product-big-title-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="product-bit-title text-center">
+                    <h2>Thanh Toán</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="single-product-area">
+    <div class="zigzag-bottom"></div>
+    <div class="container">
+        <div class="row">
+            @Html.Partial("Single_Product_Left")
+
+            <div class="col-md-8">
+                <div class="product-content-right">
+                    <div class="woocommerce">
+
+                        @using (Html.BeginForm())
+                        {
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div id="customer_details" class="col2-set">
+                                <div class="col-1">
+                                    <div class="woocommerce-billing-fields">
+                                        <h3>Chi tiết đơn đặt hàng</h3>
+
+
+                                        <p id="billing_first_name_field" class="form-row form-row-first validate-required">
+                                            <label class="" for="billing_first_name">
+                                                Họ tên
+                                            </label>
+                                            <input type="text" value="@Url.Content(nd.HoTen)" id="billing_first_name" name="billing_first_name" class="input-text " readonly="true">
+                                        </p>
+
+                                        <p id="billing_address_1_field" class="form-row form-row-wide address-field validate-required">
+                                            <label class="" for="billing_address_1">
+                                                Số điện thoại
+                                            </label>
+                                            <input type="text" value="@Url.Content(nd.SDT)" id="billing_address_1" name="billing_address_1" class="input-text " readonly="true">
+                                        </p>
+
+                                        <p id="billing_address_1_field" class="form-row form-row-wide address-field validate-required">
+                                            <label class="" for="billing_address_1">
+                                                Email
+                                            </label>
+                                            <input type="text" value="@Url.Content(nd.Email)" id="billing_address_1" name="billing_address_1" class="input-text " readonly="true">
+                                        </p>
+
+                                        <p id="billing_address_1_field" class="form-row form-row-wide address-field validate-required">
+                                            <label class="" for="billing_address_1">
+                                                Số điện thoại
+                                            </label>
+                                            <input type="text" value="@Url.Content(nd.SDT)" id="billing_address_1" name="billing_address_1" class="input-text " readonly="true">
+                                        </p>
+
+
+                                        <p id="billing_address_1_field" class="form-row form-row-wide address-field validate-required">
+                                            <label class="" for="billing_address_1">
+                                                Địa chỉ giao hàng
+                                            </label>
+                                            @Html.EditorFor(model => model.DiaChiGiao, new { htmlAttributes = new { @class = "input-text", @value=""} })
+                                            @Html.ValidationMessageFor(model => model.DiaChiGiao, "", new { @class = "text-danger" })
+                                        </p>
+
+                                        @Html.HiddenFor(model => model.MaDDH)
+
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+
+                            <h3 id="order_review_heading">Đơn đặt hàng</h3>
+
+                            <div id="order_review" style="position: relative;">
+                                <table class="shop_table">
+                                    <thead>
+                                        <tr>
+                                            <th class="product-name">Sản phẩm</th>
+                                            <th class="product-total">Tổng</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var a in gh)
+                                        {
+                                            int tongtien = a.SoLuong * a.DonGia;
+                                            <tr class="cart_item">
+                                                <td class="product-name">
+                                                    @a.TenSP <strong class="product-quantity">× @a.SoLuong</strong>
+                                                </td>
+                                                <td class="product-total">
+                                                    <span class="amount">@tongtien$</span>
+                                                </td>
+                                            </tr>
+                                        }
+
+                                    </tbody>
+                                    <tfoot>
+                                        <tr class="shipping">
+                                            <th>Ship</th>
+                                            <td>
+
+                                                Free Shipping
+                                                <input type="hidden" class="shipping_method" value="free_shipping" id="shipping_method_0" data-index="0" name="shipping_method[0]">
+                                            </td>
+                                        </tr>
+
+
+                                        <tr class="order-total">
+                                            <th>Tổng tiền</th>
+                                            <td><strong><span class="amount">@total$</span></strong> </td>
+                                        </tr>
+
+                                    </tfoot>
+                                </table>
+
+
+                                <div id="payment">
+
+
+                                    <div class="form-row place-order">
+
+                                        <input type="submit" value="Đặt hàng" id="place_order" class="button alt">
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

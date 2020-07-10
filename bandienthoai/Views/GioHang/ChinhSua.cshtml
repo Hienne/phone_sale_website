@@ -1,0 +1,63 @@
+﻿@model bandienthoai.Models.GioHangModel
+@{
+    ViewBag.Title = "ChinhSua";
+    Layout = "~/Views/Shared/MyLayout2.cshtml";
+    string urlImg = "~/Assets/Admin/img/imgSP/" + Model.HinhAnh;
+    string dongia = Model.DonGia + "$";
+    int tongtien = Model.DonGia * Model.SoLuong;
+    string tongtien2 = tongtien + "$";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <table cellspacing="0" class="shop_table cart">
+        <thead>
+            <tr>
+                <th class="product-thumbnail">&nbsp;</th>
+                <th class="product-name">Sản phẩm</th>
+                <th class="product-price">Đơn giá</th>
+                <th class="product-quantity">Số lượng</th>
+                <th class="product-subtotal">Tổng</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="cart_item">
+
+                <td class="product-thumbnail">
+                    <a href="@Url.Action("ChiTiet", "SanPham", new { id = Model.MaSP })"><img width="145" height="145" alt="poster_1_up" class="shop_thumbnail" src="@Url.Content(urlImg)"></a>
+                </td>
+
+                <td class="product-name">
+                    <a href="@Url.Action("ChiTiet", "SanPham", new { id = Model.MaSP })">@Model.TenSP</a>
+                </td>
+
+                <td class="product-price">
+                    <span class="amount">@dongia</span>
+                </td>
+
+                <td class="product-quantity">
+                    <div class="form-group">
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.SoLuong, new { htmlAttributes = new { @class = "form-control", @min = 1} })
+                            @Html.ValidationMessageFor(model => model.SoLuong, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </td>
+
+                <td class="product-subtotal">
+                    <span class="amount">@tongtien2</span>
+                </td>
+            </tr>
+            @Html.HiddenFor(model => model.MaCHTDDH)
+
+            <tr>
+                <td class="actions" colspan="6">
+                    <input type="submit" value="Lưu" name="proceed" class="checkout-button button alt wc-forward">
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+}
+

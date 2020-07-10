@@ -1,0 +1,30 @@
+﻿@model IEnumerable<bandienthoai.Entities.SanPham>
+
+    <div class="related-products-wrapper">
+        <h2 class="related-products-title">Sản phẩm tương tự</h2>
+        <div class="related-products-carousel">
+            @foreach (var a in Model)
+            {
+                string urlImg = "~/Assets/Admin/img/imgSP/" + a.HinhAnh;
+                string dongia = a.DonGia + "$";
+
+                <div class="single-product">
+                    <div class="product-f-image">
+                        <img src="@Url.Content(urlImg)" alt="">
+                        <div class="product-hover">
+                            <a href="@Url.Action("AddSP", "GioHang", new { idSP = a.MaSP })" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i>Thêm giỏ hàng</a>
+                            <a href="@Url.Action("ChiTiet", "SanPham", new { id = a.MaSP })" class="view-details-link"><i class="fa fa-link"></i>Chi tiết</a>
+                        </div>
+                    </div>
+
+                    <h2><a href="">@a.TenSP</a></h2>
+
+                    <div class="product-carousel-price">
+                        <ins>@dongia</ins>
+                    </div>
+                </div>
+            }
+
+           
+        </div>
+    </div>
